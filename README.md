@@ -1,5 +1,5 @@
 # Creative-Studio-Rentals
 Team:
-Stephanie Maru
-Aaron Amoso
+Stephanie Maru,
+Aaron Amoso,
 Hyunjung Lim
