@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Studios - Creative Studio Rentals</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <header>
         <h1>Creative Studio Rentals</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href="register.html">Sign Up</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="studios.html">Browse Studios</a></li>
@@ -19,12 +19,20 @@
         </nav>
     </header>
     <main>
-        <h2>Available Studios</h2>
+        <h2>Browse Studios</h2>
+        <form id="filterForm">
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type">
+            <label for="capacity">Minimum Capacity:</label>
+            <input type="number" id="capacity" name="capacity">
+            <button type="submit">Filter</button>
+        </form>
         <div id="studioList"></div>
+        <div id="studioDetails"></div>
     </main>
     <footer>
         <p>&copy; 2024 Creative Studio Rentals</p>
     </footer>
-    <script src="js/listings.js"></script>
+    <script src="../js/rentals.js"></script>
 </body>
 </html>
