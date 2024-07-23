@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'login.html';
     } else if (loggedInUser.role !== 'renter') {
         // Redirect if the logged-in user is not a renter
-        window.location.href = 'owner-profile.html';
+        window.location.href = 'index.html';
     } else {
         // Populate profile form with logged-in user data
         document.getElementById('name').value = loggedInUser.name;
