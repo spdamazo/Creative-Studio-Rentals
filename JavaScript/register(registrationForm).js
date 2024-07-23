@@ -11,10 +11,15 @@ form.addEventListener('submit', e => {
 });
 
 // validation function, need to get the value of all input field
-
 const validateInputs = () => {
     const nameValue = name.value.trim(); //using trim() method will REMOVE whitespaces
     const phoneValue = phone.value.trim();
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
+};
+
+// validation condition for each elements
+
+if (nameValue === '') {
+
 }
