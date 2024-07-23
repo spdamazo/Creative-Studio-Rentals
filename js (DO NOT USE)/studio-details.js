@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(name);
+        return decodeURIComponent(urlParams.get(name));
     }
 
     function displayStudioDetails(studio) {
@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const email = getQueryParameter('email');
     const name = getQueryParameter('name');
+
+    console.log('Email:', email);
+    console.log('Name:', name);
 
     if (!email || !name) {
         alert('Invalid request');
