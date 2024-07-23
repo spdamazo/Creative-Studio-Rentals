@@ -24,8 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Type: ${listing.type}</p>
                 <p>Capacity: ${listing.capacity}</p>
                 <p>Price: $${listing.price}</p>
-                <button onclick="editListing('${encodeURIComponent(listing.ownerEmail)}', '${encodeURIComponent(listing.name)}')">Edit</button>
+                <button onclick="editListing(${index})">Edit</button>
                 <button onclick="deleteListing(${index})">Delete</button>
+                <button onclick="viewDetails(${index})">View Details</button>
             </div>
         `).join('');
 
@@ -61,8 +62,19 @@ function deleteListing(index) {
 }
 
 // Function to handle editing a listing
-function editListing(ownerEmail, listingName) {
-    window.location.href = `edit-listing.html?email=${ownerEmail}&name=${listingName}`;
+function editListing(index) {
+    const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
+    const listingToEdit = listings.find((listing, i) => i === index);
+    if (listingToEdit) {
+        const { ownerEmail, name } = listingToEdit;
+        window.location.href = `edit-listing.html?email=${encodeURIComponent(ownerEmail)}&name=${encodeURIComponent(name)}`;
+    } else {
+        alert('Invalid listing index.');
+    }
 }
 
-view-listings.js
+// Function to view studio details
+function viewDetails(index) {
+    localStorage.setItem('selectedStudioIndex', index);
+    window.location.href = 'studio-details.html';
+}

@@ -1,13 +1,7 @@
-// studio-details.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsContainer = document.getElementById('studioDetails');
 
-    function getQueryParameter(name) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return decodeURIComponent(urlParams.get(name));
-    }
-
+    // Function to display studio details
     function displayStudioDetails(studio) {
         studioDetailsContainer.innerHTML = `
             <h2>${studio.name}</h2>
@@ -24,20 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    const email = getQueryParameter('email');
-    const name = getQueryParameter('name');
+    // Retrieve studio index from local storage
+    const selectedStudioIndex = localStorage.getItem('selectedStudioIndex');
 
-    console.log('Email:', email);
-    console.log('Name:', name);
-
-    if (!email || !name) {
-        alert('Invalid request');
+    if (selectedStudioIndex === null) {
+        alert('No studio selected');
         window.location.href = 'view-listings.html';
         return;
     }
 
     const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
-    const studio = listings.find(listing => listing.ownerEmail === email && listing.name === name);
+    const studio = listings[parseInt(selectedStudioIndex)];
 
     if (!studio) {
         alert('Studio not found');
@@ -45,5 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Display the studio details
     displayStudioDetails(studio);
 });
