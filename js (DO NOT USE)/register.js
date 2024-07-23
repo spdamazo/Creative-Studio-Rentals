@@ -7,7 +7,6 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
     const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
 
     // Retrieve existing users from localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];

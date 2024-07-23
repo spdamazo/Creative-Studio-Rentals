@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const users = JSON.parse(localStorage.getItem('users')) || [];
 
     // Check if user credentials are correct
-    const user = users.find(user => user.email === email && user.password === password);
+    const user = users.find(user => user.email === email); // Remove password check
 
     if (user) {
         // Login successful
