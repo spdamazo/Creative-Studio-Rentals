@@ -1,5 +1,3 @@
-// view-studios.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const studioListContainer = document.getElementById('studioList');
     const filterForm = document.getElementById('filterForm');
@@ -7,68 +5,68 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewDetailsModal = document.getElementById('viewDetailsModal');
     const viewDetailsContent = document.getElementById('viewDetailsContent');
 
-    function displayListings(listings) {
+    function displayStudioListings(studioListings) {
         studioListContainer.innerHTML = ''; // Clear the existing listings
-        listings.forEach(listing => {
-            const listingItem = document.createElement('div');
-            listingItem.className = 'listing-item';
-            listingItem.innerHTML = `
-                <h3>${listing.name}</h3>
-                <p>${listing.address}</p>
-                <p>${listing.type}</p>
-                <button class="view-details-button" data-id="${listing.id}">View Details</button>
+        studioListings.forEach(studio => {
+            const studioItem = document.createElement('div');
+            studioItem.className = 'listing-item';
+            studioItem.innerHTML = `
+                <h3>${studio.name}</h3>
+                <p>${studio.address}</p>
+                <p>${studio.type}</p>
+                <button class="view-details-button" data-id="${studio.id}">View Details</button>
             `;
-            studioListContainer.appendChild(listingItem);
+            studioListContainer.appendChild(studioItem);
         });
     }
 
-    function filterListings(event) {
+    function filterStudioListings(event) {
         event.preventDefault();
 
         const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
         const addressFilter = document.getElementById('addressFilter').value.toLowerCase();
         const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
 
-        const allListings = JSON.parse(localStorage.getItem('listings')) || [];
-        const filteredListings = allListings.filter(listing =>
-            (listing.name.toLowerCase().includes(nameFilter) || !nameFilter) &&
-            (listing.address.toLowerCase().includes(addressFilter) || !addressFilter) &&
-            (listing.type.toLowerCase().includes(typeFilter) || !typeFilter)
+        const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
+        const filteredStudioListings = allStudioListings.filter(studio =>
+            (studio.name.toLowerCase().includes(nameFilter) || !nameFilter) &&
+            (studio.address.toLowerCase().includes(addressFilter) || !addressFilter) &&
+            (studio.type.toLowerCase().includes(typeFilter) || !typeFilter)
         );
 
-        displayListings(filteredListings);
+        displayStudioListings(filteredStudioListings);
     }
 
-    function showListingDetails(listingId) {
-        const allListings = JSON.parse(localStorage.getItem('listings')) || [];
-        const selectedListing = allListings.find(listing => listing.id === listingId);
+    function showStudioDetails(studioId) {
+        const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
+        const selectedStudio = allStudioListings.find(studio => studio.id === studioId);
 
-        if (selectedListing) {
+        if (selectedStudio) {
             viewDetailsContent.innerHTML = `
-                <h2>${selectedListing.name}</h2>
-                <p><strong>Address:</strong> ${selectedListing.address}</p>
-                <p><strong>Type:</strong> ${selectedListing.type}</p>
-                <p><strong>Description:</strong> ${selectedListing.description}</p>
-                <p><strong>Owner:</strong> ${selectedListing.ownerName}</p>
-                <p><strong>Owner Phone:</strong> ${selectedListing.ownerPhone}</p>
-                <p><strong>Owner Email:</strong> ${selectedListing.ownerEmail}</p>
+                <h2>${selectedStudio.name}</h2>
+                <p><strong>Address:</strong> ${selectedStudio.address}</p>
+                <p><strong>Type:</strong> ${selectedStudio.type}</p>
+                <p><strong>Description:</strong> ${selectedStudio.description}</p>
+                <p><strong>Owner:</strong> ${selectedStudio.ownerName}</p>
+                <p><strong>Owner Phone:</strong> ${selectedStudio.ownerPhone}</p>
+                <p><strong>Owner Email:</strong> ${selectedStudio.ownerEmail}</p>
                 <button id="closeModal">Close</button>
             `;
             viewDetailsModal.style.display = 'block';
         }
     }
 
-    filterForm.addEventListener('submit', filterListings);
+    filterForm.addEventListener('submit', filterStudioListings);
 
     showAllButton.addEventListener('click', () => {
-        const allListings = JSON.parse(localStorage.getItem('listings')) || [];
-        displayListings(allListings);
+        const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
+        displayStudioListings(allStudioListings);
     });
 
     studioListContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('view-details-button')) {
-            const listingId = event.target.getAttribute('data-id');
-            showListingDetails(listingId);
+            const studioId = event.target.getAttribute('data-id');
+            showStudioDetails(studioId);
         }
     });
 
@@ -78,6 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Display all listings on page load
+    // Display all studio listings on page load
     showAllButton.click();
 });
