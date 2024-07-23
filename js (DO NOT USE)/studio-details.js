@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsContainer = document.getElementById('studioDetails');
 
     // Function to display studio details
-    function displayStudioDetails(studio) {
+    function displayStudioDetails(studio, index) {
         studioDetailsContainer.innerHTML = `
             <h2>${studio.name}</h2>
             <p><strong>Address:</strong> ${studio.address}</p>
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Available:</strong> ${studio.available ? 'Yes' : 'No'}</p>
             <p><strong>Rental Term:</strong> ${studio.rental_term}</p>
             <p><strong>Price:</strong> $${studio.price}</p>
-            <p><strong>Contact:</strong> ${studio.ownerEmail}</p>
+            <p><strong>Contact:</strong> ${studio.ownerEmail} <button onclick="viewDetails(${index})">View Details</button></p>
         `;
     }
 
@@ -37,5 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Display the studio details
-    displayStudioDetails(studio);
+    displayStudioDetails(studio, selectedStudioIndex);
 });
+
+// Function to handle the "View Details" button click
+function viewDetails(index) {
+    const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
+    const studio = listings[parseInt(index)];
+
+    if (!studio) {
+        alert('Studio not found');
+        return;
+    }
+
+    // Assuming you want to show details of the selected studio
+    alert(`Details for studio: ${studio.name}\nAddress: ${studio.address}`);
+}
