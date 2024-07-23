@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
             available: document.getElementById('available').checked,
             rental_term: document.getElementById('rental_term').value,
             price: document.getElementById('price').value,
-            ownerEmail: loggedInUser.email // Associate the listing with the owner
+            ownerEmail: loggedInUser.email, // Associate the listing with the owner
+            ownerPhone: loggedInUser.phone
         };
 
         let listings = JSON.parse(localStorage.getItem('studioListings')) || [];
