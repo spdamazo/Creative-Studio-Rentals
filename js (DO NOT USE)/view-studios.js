@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const studioList = document.getElementById('studioList');
     const studioDetails = document.getElementById('studioDetails');
     const filterButton = document.getElementById('filterButton');
+    const showAllButton = document.getElementById('showAllButton');
     const nameFilter = document.getElementById('nameFilter');
     const addressFilter = document.getElementById('addressFilter');
     const typeFilter = document.getElementById('typeFilter');
@@ -48,9 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
         renderStudios(filteredStudios);
     }
 
+    // Function to show all studios
+    function showAllStudios() {
+        const allStudios = JSON.parse(localStorage.getItem('studios')) || [];
+        renderStudios(allStudios);
+        studioDetails.style.display = 'none'; // Hide studio details
+    }
+
     // Add event listener to filter button
     filterButton.addEventListener('click', filterStudios);
 
+    // Add event listener to show all button
+    showAllButton.addEventListener('click', showAllStudios);
+
     // Initial render of all studios
-    renderStudios(JSON.parse(localStorage.getItem('studios')) || []);
+    showAllStudios();
 });
