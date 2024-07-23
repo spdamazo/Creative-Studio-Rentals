@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!loggedInUser) {
         // Redirect to login page if no user is logged in
         window.location.href = 'login.html';
-    } else if (loggedInUser.role !== 'owner') {
-        // Redirect if the logged-in user is not an owner
-        window.location.href = 'index.html';
+    } else if (loggedInUser.role !== 'renter') {
+        // Redirect if the logged-in user is not a renter
+        window.location.href = 'owner-profile.html';
     } else {
         // Populate profile form with logged-in user data
         document.getElementById('name').value = loggedInUser.name;
@@ -33,8 +33,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
         alert('Profile updated successfully!');
     });
-
-    if (loggedInUser.role === 'owner') {
-        document.getElementById('ownerLinks').style.display = 'block';
-    }
 });
