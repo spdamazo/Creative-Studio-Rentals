@@ -36,6 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('studioListings', JSON.stringify(listings));
 
         alert('Listing added successfully!');
-        window.location.href = 'profile.html'; // Redirect to profile or another page
+        window.location.href = 'owner-profile.html'; // Redirect to profile or another page
     });
 });
