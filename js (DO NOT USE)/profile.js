@@ -1,5 +1,3 @@
-// profile.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const profileForm = document.getElementById('profileForm');
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -19,17 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     profileForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
         const updatedProfile = {
             name: document.getElementById('name').value,
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
-            role: loggedInUser.role
+            role: loggedInUser.role // Ensure the role remains the same
         };
 
+        // Update the user data in localStorage
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users = users.map(user => user.email === loggedInUser.email ? updatedProfile : user);
+        localStorage.setItem('users', JSON.stringify(users));
         localStorage.setItem('loggedInUser', JSON.stringify(updatedProfile));
+
         alert('Profile updated successfully!');
     });
-    
+
     if (loggedInUser.role === 'owner') {
         document.getElementById('ownerLinks').style.display = 'block';
     }

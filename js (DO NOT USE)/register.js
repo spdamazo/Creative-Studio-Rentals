@@ -1,5 +1,3 @@
-// registrationForm.js
-
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -22,13 +20,11 @@ document.getElementById('registrationForm').addEventListener('submit', function(
             role,
             name,
             phone,
-            email,
-            password
+            email
         };
 
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
-
 
         alert('Registration successful!');
         window.location.href = 'login.html';
