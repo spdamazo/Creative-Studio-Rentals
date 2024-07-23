@@ -4,13 +4,18 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    // Retrieve users from localStorage
+    const users = JSON.parse(localStorage.getItem('users')) || [];
 
-    if (storedUser && storedUser.email === email && storedUser.password === password) {
-        localStorage.setItem('loggedInUser', JSON.stringify(storedUser));
+    // Check if user credentials are correct
+    const user = users.find(user => user.email === email && user.password === password);
+
+    if (user) {
+        // Login successful
         alert('Login successful!');
         window.location.href = 'profile.html';
     } else {
+        // Login failed
         alert('Invalid email or password.');
     }
 });
