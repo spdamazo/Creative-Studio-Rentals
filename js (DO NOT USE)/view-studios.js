@@ -56,6 +56,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display all studio listings on page load
     showAllButton.click();
 });
-
-
-view-studios.js
