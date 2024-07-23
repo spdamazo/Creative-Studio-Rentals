@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Available:</strong> ${studio.available ? 'Yes' : 'No'}</p>
             <p><strong>Rental Term:</strong> ${studio.rental_term}</p>
             <p><strong>Price:</strong> $${studio.price}</p>
-            <p><strong>Contact:</strong> ${studio.ownerEmail} <button onclick="viewDetails(${index})">View Details</button></p>
+            <p><strong>Email:</strong> ${studio.ownerEmail}</p>
+            <p><strong>Phone:</strong> ${studio.ownerPhone}</p>
         `;
     }
 
