@@ -27,6 +27,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         };
 
         users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
 
 
         alert('Registration successful!');
