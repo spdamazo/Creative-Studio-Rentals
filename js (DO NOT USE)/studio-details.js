@@ -1,3 +1,5 @@
+// studio-details.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsContainer = document.getElementById('studioDetails');
 
@@ -12,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Address:</strong> ${studio.address}</p>
             <p><strong>Area:</strong> ${studio.area} square meters</p>
             <p><strong>Type:</strong> ${studio.type}</p>
-            <p><strong>Accommodates:</strong> ${studio.accommodates}</p>
+            <p><strong>Accommodates:</strong> ${studio.capacity}</p>
             <p><strong>Parking:</strong> ${studio.parking ? 'Yes' : 'No'}</p>
-            <p><strong>Public Transport:</strong> ${studio.publicTransport ? 'Yes' : 'No'}</p>
+            <p><strong>Public Transport:</strong> ${studio.public_transport ? 'Yes' : 'No'}</p>
             <p><strong>Available:</strong> ${studio.available ? 'Yes' : 'No'}</p>
-            <p><strong>Rental Term:</strong> ${studio.rentalTerm}</p>
+            <p><strong>Rental Term:</strong> ${studio.rental_term}</p>
             <p><strong>Price per Rental Term:</strong> ${studio.price}</p>
             <p><strong>Owner:</strong> ${studio.ownerName}</p>
             <p><strong>Owner Phone:</strong> ${studio.ownerPhone}</p>
