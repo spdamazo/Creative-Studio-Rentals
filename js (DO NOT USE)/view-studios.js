@@ -3,8 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterForm = document.getElementById('filterForm');
     const showAllButton = document.getElementById('showAllButton');
 
+    let currentStudioListings = [];
+
     function displayStudioListings(studioListings) {
         studioListContainer.innerHTML = ''; // Clear the existing listings
+        currentStudioListings = studioListings; // Update the current listings
         studioListings.forEach((studio, index) => {
             const studioItem = document.createElement('div');
             studioItem.className = 'listing-item';
@@ -36,8 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function redirectToDetailsPage(index) {
-        localStorage.setItem('selectedStudioIndex', index);
-        window.location.href = 'studio-details.html'; // Use the same HTML page
+        // Find the actual studio based on the index of the filtered list
+        const studio = currentStudioListings[index];
+        if (studio) {
+            const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
+            const actualIndex = allStudioListings.findIndex(listing => listing.name === studio.name && listing.address === studio.address);
+            localStorage.setItem('selectedStudioIndex', actualIndex);
+            window.location.href = 'studio-details.html'; // Use the same HTML page
+        } else {
+            alert('Studio not found');
+        }
     }
 
     filterForm.addEventListener('submit', filterStudioListings);
