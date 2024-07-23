@@ -1,5 +1,3 @@
-// studio-details.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsContainer = document.getElementById('studioDetails');
 
