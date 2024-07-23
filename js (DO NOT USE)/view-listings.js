@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Type: ${listing.type}</p>
                 <p>Capacity: ${listing.capacity}</p>
                 <p>Price: $${listing.price}</p>
-                <a href="edit-listing.html?email=${encodeURIComponent(listing.ownerEmail)}&name=${encodeURIComponent(listing.name)}">Edit</a>
+                <button onclick="editListing('${encodeURIComponent(listing.ownerEmail)}', '${encodeURIComponent(listing.name)}')">Edit</button>
                 <button onclick="deleteListing(${index})">Delete</button>
             </div>
         `).join('');
@@ -58,4 +58,9 @@ function deleteListing(index) {
     } else {
         alert('Invalid listing index.');
     }
+}
+
+// Function to handle editing a listing
+function editListing(ownerEmail, listingName) {
+    window.location.href = `edit-listing.html?email=${ownerEmail}&name=${listingName}`;
 }
