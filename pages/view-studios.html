@@ -21,33 +21,30 @@
     </header>
     <main>
         <h2>View Studios</h2>
-       <!-- Filter Form -->
-       <div class="filter-form">
-        <label for="nameFilter">Name:</label>
-        <input type="text" id="nameFilter">
-        <label for="addressFilter">Address:</label>
-        <input type="text" id="addressFilter">
-        <label for="typeFilter">Type:</label>
-        <input type="text" id="typeFilter">
-        <button id="filterButton">Filter</button>
-        <button id="showAllButton">Show All Studios</button>
-    </div>
-    
-    <!-- Studio List -->
-    <ul id="studioList" class="studio-list"></ul>
-    
-    <!-- Studio Details -->
-    <div id="studioDetails" class="studio-details" style="display: none;">
-        <h3>Studio Details</h3>
-        <p><strong>Name:</strong> <span id="studioName"></span></p>
-        <p><strong>Address:</strong> <span id="studioAddress"></span></p>
-        <p><strong>Type:</strong> <span id="studioType"></span></p>
-        <p><strong>Description:</strong> <span id="studioDescription"></span></p>
-        <h4>Owner Contact Information</h4>
-        <p><strong>Name:</strong> <span id="ownerName"></span></p>
-        <p><strong>Phone:</strong> <span id="ownerPhone"></span></p>
-        <p><strong>Email:</strong> <span id="ownerEmail"></span></p>
-    </div>
+        <!-- Filter Form -->
+        <form id="filterForm">
+            <label for="nameFilter">Name:</label>
+            <input type="text" id="nameFilter" name="nameFilter">
+
+            <label for="addressFilter">Address:</label>
+            <input type="text" id="addressFilter" name="addressFilter">
+
+            <label for="typeFilter">Type:</label>
+            <input type="text" id="typeFilter" name="typeFilter">
+
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Button to Show All Listings -->
+        <button id="showAllButton">Show All Listings</button>
+
+        <!-- Listings Container -->
+        <div id="studioList"></div>
+
+        <!-- Details Modal -->
+        <div id="viewDetailsModal" style="display: none;">
+            <div id="viewDetailsContent"></div>
+        </div>
     </main>
     <footer>
         <p>&copy; 2024 Creative Studio Rentals</p>

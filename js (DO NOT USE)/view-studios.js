@@ -1,67 +1,83 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const studioList = document.getElementById('studioList');
-    const studioDetails = document.getElementById('studioDetails');
-    const filterButton = document.getElementById('filterButton');
-    const showAllButton = document.getElementById('showAllButton');
-    const nameFilter = document.getElementById('nameFilter');
-    const addressFilter = document.getElementById('addressFilter');
-    const typeFilter = document.getElementById('typeFilter');
+// view-studios.js
 
-    // Function to render studios in the list
-    function renderStudios(studios) {
-        studioList.innerHTML = '';
-        studios.forEach(studio => {
-            const listItem = document.createElement('li');
-            listItem.textContent = studio.name;
-            listItem.style.cursor = 'pointer';
-            listItem.addEventListener('click', () => {
-                showStudioDetails(studio);
-            });
-            studioList.appendChild(listItem);
+document.addEventListener('DOMContentLoaded', () => {
+    const studioListContainer = document.getElementById('studioList');
+    const filterForm = document.getElementById('filterForm');
+    const showAllButton = document.getElementById('showAllButton');
+    const viewDetailsModal = document.getElementById('viewDetailsModal');
+    const viewDetailsContent = document.getElementById('viewDetailsContent');
+
+    function displayListings(listings) {
+        studioListContainer.innerHTML = ''; // Clear the existing listings
+        listings.forEach(listing => {
+            const listingItem = document.createElement('div');
+            listingItem.className = 'listing-item';
+            listingItem.innerHTML = `
+                <h3>${listing.name}</h3>
+                <p>${listing.address}</p>
+                <p>${listing.type}</p>
+                <button class="view-details-button" data-id="${listing.id}">View Details</button>
+            `;
+            studioListContainer.appendChild(listingItem);
         });
     }
 
-    // Function to show details of a selected studio
-    function showStudioDetails(studio) {
-        document.getElementById('studioName').textContent = studio.name;
-        document.getElementById('studioAddress').textContent = studio.address;
-        document.getElementById('studioType').textContent = studio.type;
-        document.getElementById('studioDescription').textContent = studio.description;
-        document.getElementById('ownerName').textContent = studio.owner.name;
-        document.getElementById('ownerPhone').textContent = studio.owner.phone;
-        document.getElementById('ownerEmail').textContent = studio.owner.email;
-        studioDetails.style.display = 'block';
-    }
+    function filterListings(event) {
+        event.preventDefault();
 
-    // Function to filter studios based on input fields
-    function filterStudios() {
-        const name = nameFilter.value.toLowerCase();
-        const address = addressFilter.value.toLowerCase();
-        const type = typeFilter.value.toLowerCase();
+        const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
+        const addressFilter = document.getElementById('addressFilter').value.toLowerCase();
+        const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
 
-        const allStudios = JSON.parse(localStorage.getItem('studios')) || [];
-        const filteredStudios = allStudios.filter(studio => 
-            (!name || studio.name.toLowerCase().includes(name)) &&
-            (!address || studio.address.toLowerCase().includes(address)) &&
-            (!type || studio.type.toLowerCase().includes(type))
+        const allListings = JSON.parse(localStorage.getItem('listings')) || [];
+        const filteredListings = allListings.filter(listing =>
+            (listing.name.toLowerCase().includes(nameFilter) || !nameFilter) &&
+            (listing.address.toLowerCase().includes(addressFilter) || !addressFilter) &&
+            (listing.type.toLowerCase().includes(typeFilter) || !typeFilter)
         );
 
-        renderStudios(filteredStudios);
+        displayListings(filteredListings);
     }
 
-    // Function to show all studios
-    function showAllStudios() {
-        const allStudios = JSON.parse(localStorage.getItem('studios')) || [];
-        renderStudios(allStudios);
-        studioDetails.style.display = 'none'; // Hide studio details
+    function showListingDetails(listingId) {
+        const allListings = JSON.parse(localStorage.getItem('listings')) || [];
+        const selectedListing = allListings.find(listing => listing.id === listingId);
+
+        if (selectedListing) {
+            viewDetailsContent.innerHTML = `
+                <h2>${selectedListing.name}</h2>
+                <p><strong>Address:</strong> ${selectedListing.address}</p>
+                <p><strong>Type:</strong> ${selectedListing.type}</p>
+                <p><strong>Description:</strong> ${selectedListing.description}</p>
+                <p><strong>Owner:</strong> ${selectedListing.ownerName}</p>
+                <p><strong>Owner Phone:</strong> ${selectedListing.ownerPhone}</p>
+                <p><strong>Owner Email:</strong> ${selectedListing.ownerEmail}</p>
+                <button id="closeModal">Close</button>
+            `;
+            viewDetailsModal.style.display = 'block';
+        }
     }
 
-    // Add event listener to filter button
-    filterButton.addEventListener('click', filterStudios);
+    filterForm.addEventListener('submit', filterListings);
 
-    // Add event listener to show all button
-    showAllButton.addEventListener('click', showAllStudios);
+    showAllButton.addEventListener('click', () => {
+        const allListings = JSON.parse(localStorage.getItem('listings')) || [];
+        displayListings(allListings);
+    });
 
-    // Initial render of all studios
-    showAllStudios();
+    studioListContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('view-details-button')) {
+            const listingId = event.target.getAttribute('data-id');
+            showListingDetails(listingId);
+        }
+    });
+
+    viewDetailsModal.addEventListener('click', (event) => {
+        if (event.target.id === 'closeModal') {
+            viewDetailsModal.style.display = 'none';
+        }
+    });
+
+    // Display all listings on page load
+    showAllButton.click();
 });
