@@ -2,7 +2,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     event.preventDefault();
 
     const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value; // Include password check if required
 
     // Retrieve users from localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -11,11 +10,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const user = users.find(user => user.email === email);
 
     if (user) {
-        // Optionally, check if the password matches (if you have implemented password checks)
-        // if (user.password !== password) {
-        //     alert('Invalid password.');
-        //     return;
-        // }
 
         // Save user data to localStorage for the session
         localStorage.setItem('loggedInUser', JSON.stringify(user));
