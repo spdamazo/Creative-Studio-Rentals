@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const studioListContainer = document.getElementById('studioList');
     const filterForm = document.getElementById('filterForm');
     const showAllButton = document.getElementById('showAllButton');
-    const viewDetailsModal = document.getElementById('viewDetailsModal');
-    const viewDetailsContent = document.getElementById('viewDetailsContent');
 
     function displayStudioListings(studioListings) {
         studioListContainer.innerHTML = ''; // Clear the existing listings
@@ -37,23 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         displayStudioListings(filteredStudioListings);
     }
 
-    function showStudioDetails(studioId) {
-        const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
-        const selectedStudio = allStudioListings.find(studio => studio.id === studioId);
-
-        if (selectedStudio) {
-            viewDetailsContent.innerHTML = `
-                <h2>${selectedStudio.name}</h2>
-                <p><strong>Address:</strong> ${selectedStudio.address}</p>
-                <p><strong>Type:</strong> ${selectedStudio.type}</p>
-                <p><strong>Description:</strong> ${selectedStudio.description}</p>
-                <p><strong>Owner:</strong> ${selectedStudio.ownerName}</p>
-                <p><strong>Owner Phone:</strong> ${selectedStudio.ownerPhone}</p>
-                <p><strong>Owner Email:</strong> ${selectedStudio.ownerEmail}</p>
-                <button id="closeModal">Close</button>
-            `;
-            viewDetailsModal.style.display = 'block';
-        }
+    function redirectToDetailsPage(studioId) {
+        window.location.href = `studio-details.html?id=${studioId}`;
     }
 
     filterForm.addEventListener('submit', filterStudioListings);
@@ -66,13 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     studioListContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('view-details-button')) {
             const studioId = event.target.getAttribute('data-id');
-            showStudioDetails(studioId);
-        }
-    });
-
-    viewDetailsModal.addEventListener('click', (event) => {
-        if (event.target.id === 'closeModal') {
-            viewDetailsModal.style.display = 'none';
+            redirectToDetailsPage(studioId);
         }
     });
 
