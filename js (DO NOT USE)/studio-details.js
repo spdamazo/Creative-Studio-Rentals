@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    const email = getQueryParameter('email');
-    const name = getQueryParameter('name');
+    // const email = getQueryParameter('email');
+    // const name = getQueryParameter('name');
 
-    if (!email || !name) {
-        alert('Invalid request');
-        window.location.href = 'view-listings.html';
-        return;
-    }
+    // if (!email || !name) {
+    //     alert('Invalid request');
+    //     window.location.href = 'view-listings.html';
+    //     return;
+    // }
 
     const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
     const studio = listings.find(listing => listing.ownerEmail === email && listing.name === name);
