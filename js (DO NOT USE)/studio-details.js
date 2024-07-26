@@ -29,7 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
-    const studio = listings[parseInt(selectedStudioIndex)];
+    const studioIndex = parseInt(selectedStudioIndex, 10);
+
+    if (isNaN(studioIndex) || studioIndex < 0 || studioIndex >= listings.length) {
+        alert('Invalid studio selected');
+        window.location.href = 'view-listings.html';
+        return;
+    }
+
+    const studio = listings[studioIndex];
 
     if (!studio) {
         alert('Studio not found');

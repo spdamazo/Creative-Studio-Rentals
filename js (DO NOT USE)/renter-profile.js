@@ -5,25 +5,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!loggedInUser) {
         // Redirect to login page if no user is logged in
         window.location.href = 'login.html';
-    } else if (loggedInUser.role !== 'renter') {
+        return;
+    } 
+    
+    if (loggedInUser.role !== 'renter') {
         // Redirect if the logged-in user is not a renter
         window.location.href = 'index.html';
-    } else {
-        // Populate profile form with logged-in user data
-        document.getElementById('name').value = loggedInUser.name;
-        document.getElementById('phone').value = loggedInUser.phone;
-        document.getElementById('email').value = loggedInUser.email;
-    }
+        return;
+    } 
+    
+    // Populate profile form with logged-in user data
+    document.getElementById('name').value = loggedInUser.name;
+    document.getElementById('phone').value = loggedInUser.phone;
+    document.getElementById('email').value = loggedInUser.email;
 
     profileForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const updatedProfile = {
-            name: document.getElementById('name').value,
-            phone: document.getElementById('phone').value,
-            email: document.getElementById('email').value,
+            name: document.getElementById('name').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            email: document.getElementById('email').value.trim(),
             role: loggedInUser.role // Ensure the role remains the same
         };
+
+        // Simple validation to check if the fields are not empty
+        if (!updatedProfile.name || !updatedProfile.phone || !updatedProfile.email) {
+            alert('All fields are required.');
+            return;
+        }
 
         // Update the user data in localStorage
         let users = JSON.parse(localStorage.getItem('users')) || [];
