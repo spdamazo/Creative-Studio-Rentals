@@ -26,6 +26,12 @@ nav ul li a {
     text-decoration: none;
 }
 
+/* Add hover effect and pointer cursor */
+nav ul li a:hover {
+    color: #ffd700; /* Yellow color on hover */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
 main {
     padding: 20px;
 }
@@ -51,4 +57,8 @@ form button {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+form button:hover {
+    background-color: #555; /* Darker background color on hover */
 }
