@@ -1,8 +1,9 @@
-// add-listing.js
-
+// Wait for the DOM to fully load
 document.addEventListener('DOMContentLoaded', () => {
+    // Retrieve the logged-in user from local storage
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
+    // Check if no user is logged in
     if (!loggedInUser) {
         // Redirect to login page if no user is logged in
         window.location.href = 'login.html';
@@ -11,12 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html';
     }
 
+    // Get the add listing form element
     const addListingForm = document.getElementById('addListingForm');
 
+    // Add event listener to the add listing form for form submission
     addListingForm.addEventListener('submit', (e) => {
+        // Prevent default form submission behavior
         e.preventDefault();
 
-        // Collect form data
+        // Collect form data to create a new listing
         const newListing = {
             name: document.getElementById('name').value,
             address: document.getElementById('address').value,
@@ -32,11 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ownerPhone: loggedInUser.phone
         };
 
+        // Retrieve existing listings from local storage
         let listings = JSON.parse(localStorage.getItem('studioListings')) || [];
+        // Add the new listing to the list of listings
         listings.push(newListing);
+        // Save the updated list of listings to local storage
         localStorage.setItem('studioListings', JSON.stringify(listings));
 
+        // Display a success message
         alert('Listing added successfully!');
-        window.location.href = 'owner-profile.html'; // Redirect to profile or another page
+        // Redirect to the profile or another page
+        window.location.href = 'owner-profile.html';
     });
 });

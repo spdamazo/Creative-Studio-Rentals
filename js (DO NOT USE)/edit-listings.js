@@ -1,8 +1,9 @@
-// edit-listing.js
-
+// Wait for the DOM to fully load
 document.addEventListener('DOMContentLoaded', () => {
+    // Retrieve the logged-in user from local storage
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
+    // Check if no user is logged in
     if (!loggedInUser) {
         // Redirect to login page if no user is logged in
         window.location.href = 'login.html';
@@ -11,19 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html';
     }
 
+    // Get query parameters from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get('email');
     const name = urlParams.get('name');
 
+    // Check if email or name is missing in query parameters
     if (!email || !name) {
         alert('Invalid request');
         window.location.href = 'view-listings.html';
         return;
     }
 
+    // Retrieve existing listings from local storage
     const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
+    // Find the listing to edit based on email and name
     const listingToEdit = listings.find(listing => listing.ownerEmail === email && listing.name === name);
 
+    // Check if the listing to edit is not found
     if (!listingToEdit) {
         alert('Listing not found');
         window.location.href = 'view-listings.html';
@@ -42,9 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('rental_term').value = listingToEdit.rental_term;
     document.getElementById('price').value = listingToEdit.price;
 
+    // Add event listener to the edit listing form for form submission
     document.getElementById('editListingForm').addEventListener('submit', (e) => {
+        // Prevent default form submission behavior
         e.preventDefault();
 
+        // Collect updated form data to create an updated listing
         const updatedListing = {
             name: document.getElementById('name').value,
             address: document.getElementById('address').value,
@@ -59,13 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
             ownerEmail: listingToEdit.ownerEmail // Ensure ownerEmail remains unchanged
         };
 
+        // Update the list of listings with the updated listing data
         const updatedListings = listings.map(listing => 
             (listing.ownerEmail === email && listing.name === name) ? updatedListing : listing
         );
 
+        // Save the updated list of listings to local storage
         localStorage.setItem('studioListings', JSON.stringify(updatedListings));
 
+        // Display a success message
         alert('Listing updated successfully!');
-        window.location.href = 'view-listings.html'; // Redirect to view listings page
+        // Redirect to the view listings page
+        window.location.href = 'view-listings.html';
     });
 });
