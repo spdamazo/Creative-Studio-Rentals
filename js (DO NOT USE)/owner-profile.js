@@ -44,3 +44,44 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Profile updated successfully!');
     });
 });
+
+// Open owner information modal
+function viewOwnerDetails(ownerId) {
+  // Fetch owner details based on ownerId
+  const ownerDetails = getOwnerDetailsById(ownerId);
+  
+  // Populate modal with owner details
+  const modal = document.getElementById('owner-modal');
+  const detailsDiv = document.getElementById('owner-details');
+  detailsDiv.innerHTML = `
+    <img src="${ownerDetails.photo}" alt="Owner Photo">
+    <h3>${ownerDetails.name}</h3>
+    <p>Email: ${ownerDetails.email}</p>
+    <p>Phone: ${ownerDetails.phone}</p>
+    <h4>Owned Studios</h4>
+    <ul>
+      ${ownerDetails.studios.map(studio => `<li>${studio}</li>`).join('')}
+    </ul>
+  `;
+  
+  // Show modal
+  modal.style.display = "block";
+}
+
+// Close owner information modal
+function closeOwnerModal() {
+  const modal = document.getElementById('owner-modal');
+  modal.style.display = "none";
+}
+
+// Sample function to fetch owner details (replace with actual data fetching logic)
+function getOwnerDetailsById(ownerId) {
+  // This is just a sample data. Replace this with actual data fetching logic.
+  return {
+    photo: 'owner-photo.jpg',
+    name: 'Sample Owner',
+    email: 'owner@example.com',
+    phone: '123-456-7890',
+    studios: ['Studio 1', 'Studio 2']
+  };
+}
