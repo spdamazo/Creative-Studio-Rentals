@@ -19,32 +19,42 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Retrieve studio index from local storage
-    const selectedStudioIndex = localStorage.getItem('selectedStudioIndex');
+    function loadStudioDetails() {
+        // Retrieve studio index from local storage
+        const selectedStudioIndex = localStorage.getItem('selectedStudioIndex');
 
-    if (selectedStudioIndex === null) {
-        alert('No studio selected');
-        window.location.href = 'view-listings.html';
-        return;
+        if (selectedStudioIndex === null) {
+            alert('No studio selected');
+            window.location.href = 'view-listings.html';
+            return;
+        }
+
+        const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
+        const studioIndex = parseInt(selectedStudioIndex, 10);
+
+        if (isNaN(studioIndex) || studioIndex < 0 || studioIndex >= listings.length) {
+            alert('Invalid studio selected');
+            window.location.href = 'view-listings.html';
+            return;
+        }
+
+        const studio = listings[studioIndex];
+
+        if (!studio) {
+            alert('Studio not found');
+            window.location.href = 'view-listings.html';
+            return;
+        }
+
+        // Display the studio details
+        displayStudioDetails(studio);
     }
 
-    const listings = JSON.parse(localStorage.getItem('studioListings')) || [];
-    const studioIndex = parseInt(selectedStudioIndex, 10);
+    window.addEventListener('popstate', function(event) {
+        if (event.state && event.state.page === 'studioDetails') {
+            loadStudioDetails();
+        }
+    });
 
-    if (isNaN(studioIndex) || studioIndex < 0 || studioIndex >= listings.length) {
-        alert('Invalid studio selected');
-        window.location.href = 'view-listings.html';
-        return;
-    }
-
-    const studio = listings[studioIndex];
-
-    if (!studio) {
-        alert('Studio not found');
-        window.location.href = 'view-listings.html';
-        return;
-    }
-
-    // Display the studio details
-    displayStudioDetails(studio);
+    loadStudioDetails();
 });

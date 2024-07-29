@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentStudioListings = [];
 
+    // Function to display studio listings
     function displayStudioListings(studioListings) {
         studioListContainer.innerHTML = ''; // Clear the existing listings
         currentStudioListings = studioListings; // Update the current listings
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to filter studio listings based on the filter form
     function filterStudioListings(event) {
         event.preventDefault();
 
@@ -38,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayStudioListings(filteredStudioListings);
     }
 
+    // Function to redirect to the studio details page
     function redirectToDetailsPage(index) {
         // Find the actual studio based on the index of the filtered list
         const studio = currentStudioListings[index];
@@ -45,19 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
             const actualIndex = allStudioListings.findIndex(listing => listing.name === studio.name && listing.address === studio.address);
             localStorage.setItem('selectedStudioIndex', actualIndex);
-            window.location.href = 'studio-details.html'; // Use the same HTML page
+            history.pushState({page: 'studioDetails'}, '', 'studio-details.html'); // Add state to history
+            window.location.href = 'studio-details.html'; // Redirect to details page
         } else {
             alert('Studio not found');
         }
     }
 
+    // Event listener for the filter form submission
     filterForm.addEventListener('submit', filterStudioListings);
 
+    // Event listener for the "Show All" button
     showAllButton.addEventListener('click', () => {
         const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
         displayStudioListings(allStudioListings);
     });
 
+    // Event listener for the "View Details" buttons
     studioListContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('view-details-button')) {
             const studioIndex = event.target.getAttribute('data-index');
