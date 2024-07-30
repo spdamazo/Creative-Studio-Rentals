@@ -10,7 +10,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const user = users.find(user => user.email === email);
 
     if (user) {
-
         // Save user data to localStorage for the session
         localStorage.setItem('loggedInUser', JSON.stringify(user));
 
@@ -33,25 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
     if (loggedInUser) {
-        if (user.role === 'owner') {
+        loginLogoutLink.textContent = 'Logout';
+        loginLogoutLink.href = '#';
+        loginLogoutLink.addEventListener('click', function() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'login.html';
+        });
+
+        // Automatically redirect based on user role if logged in
+        if (loggedInUser.role === 'owner') {
             window.location.href = 'owner-profile.html';
-            loginLogoutLink.textContent = 'Logout';
-            loginLogoutLink.href = '#';
-            loginLogoutLink.addEventListener('click', function() {
-                localStorage.removeItem('loggedInUser');
-                window.location.href = 'login.html';
-            });
-        } else if (user.role === 'renter') {
+        } else if (loggedInUser.role === 'renter') {
             window.location.href = 'renter-profile.html';
-            loginLogoutLink.textContent = 'Logout';
-            loginLogoutLink.href = '#';
-            loginLogoutLink.addEventListener('click', function() {
-                localStorage.removeItem('loggedInUser');
-                window.location.href = 'login.html';
-            });
         } else {
             alert('User role is not recognized.');
         }
-
     }
 });
