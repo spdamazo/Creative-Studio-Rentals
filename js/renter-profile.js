@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Get the profile form element
     const profileForm = document.getElementById('profileForm');
+    
+    // Retrieve the logged-in user data from localStorage
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
     if (!loggedInUser) {
@@ -15,9 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('email').value = loggedInUser.email;
     }
 
+    // Add an event listener for form submission
     profileForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent the default form submission behavior
 
+        // Create an updated profile object with the form values
         const updatedProfile = {
             name: document.getElementById('name').value,
             phone: document.getElementById('phone').value,
@@ -31,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('users', JSON.stringify(users));
         localStorage.setItem('loggedInUser', JSON.stringify(updatedProfile));
 
+        // Notify the user that the profile has been updated
         alert('Profile updated successfully!');
     });
 });
