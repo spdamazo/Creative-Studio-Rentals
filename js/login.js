@@ -27,3 +27,17 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         alert('Invalid email.');
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loginLogoutLink = document.getElementById('loginLogoutLink');
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    if (loggedInUser) {
+        loginLogoutLink.textContent = 'Logout';
+        loginLogoutLink.href = '#';
+        loginLogoutLink.addEventListener('click', function() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'login.html';
+        });
+    }
+});
