@@ -33,11 +33,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
     if (loggedInUser) {
-        loginLogoutLink.textContent = 'Logout';
-        loginLogoutLink.href = '#';
-        loginLogoutLink.addEventListener('click', function() {
-            localStorage.removeItem('loggedInUser');
-            window.location.href = 'login.html';
-        });
+        if (user.role === 'owner') {
+            window.location.href = 'owner-profile.html';
+            loginLogoutLink.textContent = 'Logout';
+            loginLogoutLink.href = '#';
+            loginLogoutLink.addEventListener('click', function() {
+                localStorage.removeItem('loggedInUser');
+                window.location.href = 'login.html';
+            });
+        } else if (user.role === 'renter') {
+            window.location.href = 'renter-profile.html';
+            loginLogoutLink.textContent = 'Logout';
+            loginLogoutLink.href = '#';
+            loginLogoutLink.addEventListener('click', function() {
+                localStorage.removeItem('loggedInUser');
+                window.location.href = 'login.html';
+            });
+        } else {
+            alert('User role is not recognized.');
+        }
+
     }
 });
