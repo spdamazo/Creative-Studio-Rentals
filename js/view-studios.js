@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
     // Get references to the relevant DOM elements
     const studioListContainer = document.getElementById('studioList');
     const filterForm = document.getElementById('filterForm');

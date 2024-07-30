@@ -3,6 +3,13 @@ body {
     margin: 0;
     padding: 0;
 }
+/*Title color change*/
+.colorchange-text {
+    font-size: 2em; /* Adjust as needed */
+    font-weight: bold;
+    text-align: center;
+    transition: color 0.5s ease;
+}
 
 header, footer {
     background-color: #333;
