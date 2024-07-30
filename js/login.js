@@ -57,3 +57,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 });
+
+// Update the login/logout link based on the user's login state
+document.addEventListener('DOMContentLoaded', function() {
+    const loginLogoutLink = document.getElementById('loginLogoutLink');
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    if (loggedInUser) {
+        // If user is logged in, update the link to show "Logout"
+        loginLogoutLink.textContent = 'Logout';
+        loginLogoutLink.href = '#';
+        loginLogoutLink.addEventListener('click', function() {
+            localStorage.removeItem('loggedInUser'); // Remove the logged-in user's data
+            window.location.href = 'login.html'; // Redirect to login page
+        });
+    } else {
+        // If user is not logged in, set the link to "Login"
+        loginLogoutLink.textContent = 'Login';
+        loginLogoutLink.href = 'login.html';
+    }
+});
