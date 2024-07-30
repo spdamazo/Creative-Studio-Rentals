@@ -1,4 +1,3 @@
-// Wait for the DOM content to be fully loaded before running the script
 document.addEventListener('DOMContentLoaded', () => {
     // Get the profile form element and the logged-in user data from localStorage
     const profileForm = document.getElementById('profileForm');
