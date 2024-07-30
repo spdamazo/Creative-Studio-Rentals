@@ -11,6 +11,21 @@ header, footer {
     padding: 1em 0;
 }
 
+nav {
+    background-image: url('https://cdn.pixabay.com/photo/2019/04/10/12/40/watercolor-4117017_1280.png');
+    background-size: cover;
+    opacity: 0.8;
+    background-color: lightgray;
+    height: 120px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
