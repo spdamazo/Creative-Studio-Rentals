@@ -83,4 +83,4 @@
 
     // Display all studio listings on page load
     showAllButton.click();
-});
+
