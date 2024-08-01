@@ -5,14 +5,15 @@ document.addEventListener("DOMContentLoaded", function() {
     let addresses = ["1111 4 St SW, Calgary, AB T2R 1N2", "22 Main St, Vancouver, BC V6B 1P2", "555 Queen St, Toronto, ON M5V 2B6"];
     let features = ["Swimming pool | Fitness center | Storage", "Gym | Rooftop Terrace | Parking", "Garden | Library | Conference Room"];
     let prices = ["$1,799–$1,824", "$2,300–$2,500", "$1,200–$1,400"];
+    let picturs = ["https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://plus.unsplash.com/premium_photo-1679079455767-1bbb40492d6a?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"];
 
-        for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         // Create the elements
         let listbox = document.createElement('div');
         listbox.classList.add('listbox');
 
         let img = document.createElement('img');
-        img.src = "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?q=80&w=2532&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+        img.src = picturs[i];
         img.alt = "Listing Image";
         img.classList.add('listing-image');
 
