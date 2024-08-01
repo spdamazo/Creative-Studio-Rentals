@@ -96,3 +96,4 @@ function viewDetails(index) {
     // Redirect to the studio details page
     window.location.href = 'studio-details.html';
 }
+
