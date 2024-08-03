@@ -10,6 +10,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: #f5f5f5;
+    text-align: center;
 }
 
 /* Header styles */
@@ -127,4 +128,69 @@ footer {
     bottom: 0;
     width: 100%;
     margin-top: 20px;
+}
+
+/* Listing styles */
+.container {
+    display: flex;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+}
+
+.listbox {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0px 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-image {
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.listing-details {
+    padding: 10px 0;
+}
+
+.listing-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.listing-info {
+    color: #555;
+    margin: 5px 0;
+}
+
+.listing-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+#listing-container {
+    margin-left: 250px;
+    text-align: center;
+}
+
+/* Button styles */
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
 }
