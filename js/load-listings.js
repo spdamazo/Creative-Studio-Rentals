@@ -1,3 +1,5 @@
+// Embedded in html line 80
+
 document.addEventListener("DOMContentLoaded", function() {
     let container = document.getElementById('listing-container');
 
