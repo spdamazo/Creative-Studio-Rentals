@@ -1,3 +1,5 @@
+// Owner's Add Listing - add studios in owner's listing
+
 // Wait for the DOM to fully load
 document.addEventListener('DOMContentLoaded', () => {
     // Retrieve the logged-in user from local storage

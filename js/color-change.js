@@ -1,4 +1,4 @@
-//title color change every 1 second
+// Header - Title color change every 1 second
 
 document.addEventListener('DOMContentLoaded', () => {
     const colors = ['#FAD02E',

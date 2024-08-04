@@ -1,3 +1,5 @@
+// Studio details - renter's view of studio details
+
 document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsViewContainer = document.getElementById('studioDetailsView');
 

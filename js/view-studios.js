@@ -1,3 +1,5 @@
+// View all listings page - renter's view of his all listings
+
 document.addEventListener('DOMContentLoaded', () => {
     const studioListContainer = document.getElementById('studioList');
     const filterForm = document.getElementById('filterForm');

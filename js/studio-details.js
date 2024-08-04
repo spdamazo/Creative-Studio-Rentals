@@ -1,3 +1,5 @@
+// Studio details - owner's view of studio details
+
 document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsContainer = document.getElementById('studioDetails');
 

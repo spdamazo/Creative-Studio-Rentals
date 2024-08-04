@@ -1,3 +1,5 @@
+// View all listings page - owner's view of his own listings
+
 document.addEventListener('DOMContentLoaded', () => {
     // Retrieve the logged-in user from local storage
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));

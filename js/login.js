@@ -1,3 +1,5 @@
+// Login page - existing user logs in
+
 // Handle login form submission
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     // Prevent the default form submission behavior

@@ -1,3 +1,5 @@
+// Owner's Edit Listing - edit existing studios in owner's listing
+
 document.addEventListener('DOMContentLoaded', () => {
     // Retrieve the logged-in user from local storage
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
