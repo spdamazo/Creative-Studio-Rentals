@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             } else {
                 alert('Please log in to check availability.');
-                window.location.href = '../pages/login.html';
+                window.location.href = 'pages/login.html';
             }
         });
 
