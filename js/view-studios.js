@@ -1,4 +1,4 @@
-// View all listings page - renter's view of his all listings
+// View all listings page - renter's view of all listings
 
 document.addEventListener('DOMContentLoaded', () => {
     const studioListContainer = document.getElementById('studioList');

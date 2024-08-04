@@ -1,21 +1,32 @@
-// Homepage - Embedded in html line 80
-
 document.addEventListener("DOMContentLoaded", function() {
     let container = document.getElementById('listing-container');
 
-    let titles = ["Shared Office", "Modern Workspace", "Recording Room"];
-    let addresses = ["1111 4 St SW, Calgary, AB T2R 1N2", "22 Main St, Calgary, AB V6B 1P2", "555 Queen St, Calgary, AB M5V 2B6"];
-    let features = ["Swimming pool | Fitness center | Storage", "Gym | Rooftop Terrace | Parking", "Garden | Library | Conference Room"];
-    let prices = ["$600–$1,824", "$2,300–$2,500", "$1,000–$1,400"];
-    let picturs = ["https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://plus.unsplash.com/premium_photo-1679079455767-1bbb40492d6a?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"];
+    // Fetch the listings from local storage
+    let studioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
 
-    for (let i = 0; i < 3; i++) {
+    // Function to check if a URL is valid
+    function isValidUrl(url) {
+        return typeof url === 'string' && (url.startsWith('http') || url.startsWith('data:image'));
+    }
+
+    // Function to check if user is logged in
+    function isLoggedIn() {
+        return localStorage.getItem('loggedInUser') !== null;
+    }
+
+    // Function to get the logged-in user's role
+    function getUserRole() {
+        const user = JSON.parse(localStorage.getItem('loggedInUser'));
+        return user ? user.role : null;
+    }
+
+    studioListings.forEach((studio, index) => {
         // Create the elements
         let listbox = document.createElement('div');
         listbox.classList.add('listbox');
 
         let img = document.createElement('img');
-        img.src = picturs[i];
+        img.src = isValidUrl(studio.image) ? studio.image : '../images/default-photo.jpg';
         img.alt = "Listing Image";
         img.classList.add('listing-image');
 
@@ -24,23 +35,42 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let listingTitle = document.createElement('h3');
         listingTitle.classList.add('listing-title');
-        listingTitle.textContent = titles[i];
+        listingTitle.textContent = studio.name;
 
         let listingInfo1 = document.createElement('p');
         listingInfo1.classList.add('listing-info');
-        listingInfo1.textContent = addresses[i];
+        listingInfo1.textContent = studio.address;
 
         let listingInfo2 = document.createElement('p');
         listingInfo2.classList.add('listing-info');
-        listingInfo2.textContent = features[i];
+        listingInfo2.textContent = studio.type;
 
         let listingPrice = document.createElement('p');
         listingPrice.classList.add('listing-price');
-        listingPrice.textContent = prices[i];
+        listingPrice.textContent = studio.price ? `$${studio.price}` : 'Price not listed';
 
         let btn = document.createElement('div');
         btn.classList.add('btn');
         btn.textContent = "Check availability";
+        btn.dataset.index = index;
+
+        // Add event listener to the button to redirect to the details page
+        btn.addEventListener('click', () => {
+            if (isLoggedIn()) {
+                localStorage.setItem('selectedStudioIndex', index);
+                const role = getUserRole();
+                if (role === 'owner') {
+                    window.location.href = 'studio-details.html';
+                } else if (role === 'renter') {
+                    window.location.href = 'studio-details-view.html';
+                } else {
+                    alert('Invalid user role.');
+                }
+            } else {
+                alert('Please log in to check availability.');
+                window.location.href = '../pages/login.html';
+            }
+        });
 
         // Append the elements
         listingDetails.appendChild(listingTitle);
@@ -53,5 +83,5 @@ document.addEventListener("DOMContentLoaded", function() {
         listbox.appendChild(listingDetails);
 
         container.appendChild(listbox);
-    }
+    });
 });
