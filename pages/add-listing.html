@@ -6,19 +6,20 @@
     <title>Add Listing - Creative Studio Rentals</title>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/color-change.js" defer></script> 
+</head>
 <body>
     <header>
         <h1 class="colorchange-text" id="dynamicTitle">Creative Studio Rentals</h1>
         <nav>
             <ul>
-                <li><a href="owner_homepage.html">Home</a></li>
-                <li><a href="login.html">Logout</a></li>
-                <li><a id="" href="owner-profile.html">Profile</a></li> <!-- Profile link -->
+                <li><a href="owner-profile.html">Home</a></li>
+                <li><a id="loginLogoutLink" href="login.html">Logout</a></li>
+                <li><a href="owner-profile.html">Profile</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <button onclick="history.back()">Go Back</button> 
+        <button onclick="history.back()">Go Back</button>
         <h2>Add Studio Listing</h2>
         <form id="addListingForm">
             <label for="name">Studio Name:</label>
@@ -41,6 +42,8 @@
             <input type="text" id="rental_term" name="rental_term" required>
             <label for="price">Price:</label>
             <input type="number" id="price" name="price" required>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*">
             <button type="submit">Add Listing</button>
         </form>
     </main>

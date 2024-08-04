@@ -3,13 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Retrieve the logged-in user from local storage
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
-    // Check if no user is logged in
-    if (!loggedInUser) {
-        // Redirect to login page if no user is logged in
-        window.location.href = 'login.html';
-    } else if (loggedInUser.role !== 'owner') {
-        // Redirect if the logged-in user is not an owner
-        window.location.href = 'index.html';
+    // Check if no user is logged in or if the logged-in user is not an owner
+    if (!loggedInUser || loggedInUser.role !== 'owner') {
+        // Redirect to login page if no user is logged in or not an owner
+        window.location.href = loggedInUser ? 'index.html' : 'login.html';
+        return;
     }
 
     // Get the add listing form element
@@ -33,19 +31,43 @@ document.addEventListener('DOMContentLoaded', () => {
             rental_term: document.getElementById('rental_term').value,
             price: document.getElementById('price').value,
             ownerEmail: loggedInUser.email, // Associate the listing with the owner
-            ownerPhone: loggedInUser.phone
+            ownerPhone: loggedInUser.phone,
+            image: '' // Placeholder for the image data
         };
 
-        // Retrieve existing listings from local storage
-        let listings = JSON.parse(localStorage.getItem('studioListings')) || [];
-        // Add the new listing to the list of listings
-        listings.push(newListing);
-        // Save the updated list of listings to local storage
-        localStorage.setItem('studioListings', JSON.stringify(listings));
+        // Handle the image upload
+        const imageInput = document.getElementById('image');
+        if (imageInput.files && imageInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                newListing.image = e.target.result; // Store the base64 encoded image data
 
-        // Display a success message
-        alert('Listing added successfully!');
-        // Redirect to the profile or another page
-        window.location.href = 'owner-profile.html';
+                // Retrieve existing listings from local storage
+                let listings = JSON.parse(localStorage.getItem('studioListings')) || [];
+                // Add the new listing to the list of listings
+                listings.push(newListing);
+                // Save the updated list of listings to local storage
+                localStorage.setItem('studioListings', JSON.stringify(listings));
+
+                // Display a success message
+                alert('Listing added successfully!');
+                // Redirect to the profile or another page
+                window.location.href = 'owner-profile.html';
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        } else {
+            // If no image is uploaded, proceed without it
+            // Retrieve existing listings from local storage
+            let listings = JSON.parse(localStorage.getItem('studioListings')) || [];
+            // Add the new listing to the list of listings
+            listings.push(newListing);
+            // Save the updated list of listings to local storage
+            localStorage.setItem('studioListings', JSON.stringify(listings));
+
+            // Display a success message
+            alert('Listing added successfully!');
+            // Redirect to the profile or another page
+            window.location.href = 'owner-profile.html';
+        }
     });
 });

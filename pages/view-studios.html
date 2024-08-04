@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Studios - Creative Studio Rentals</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="../js/color-change.js" defer></script> 
+    <script src="../js/color-change.js" defer></script>
 </head>
 <body>
     <header>
         <h1 class="colorchange-text" id="dynamicTitle">Creative Studio Rentals</h1>
         <nav>
             <ul>
-                <li><a href="renter-homepage.html">Home</a></li>
-                <li><a href="login.html">Logout</a></li>
-                <li><a id="" href="renter-profile.html">Renter Profile</a></li>
+                <li><a href="renter-profile.html">Home</a></li>
+                <li><a id="loginLogoutLink" href="login.html">Logout</a></li>
+                <li><a href="renter-profile.html">Profile</a></li>
             </ul>
         </nav>
     </header>
@@ -38,11 +38,6 @@
 
         <!-- Listings Container -->
         <div id="studioList"></div>
-
-        <!-- Details Modal -->
-        <div id="viewDetailsModal" style="display: none;">
-            <div id="viewDetailsContent"></div>
-        </div>
     </main>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear());</script> Creative Studio Rentals. All rights reserved.</p>

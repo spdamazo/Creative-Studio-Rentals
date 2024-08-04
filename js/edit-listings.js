@@ -1,4 +1,3 @@
-// Wait for the DOM to fully load
 document.addEventListener('DOMContentLoaded', () => {
     // Retrieve the logged-in user from local storage
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -68,17 +67,43 @@ document.addEventListener('DOMContentLoaded', () => {
             ownerEmail: listingToEdit.ownerEmail // Ensure ownerEmail remains unchanged
         };
 
-        // Update the list of listings with the updated listing data
-        const updatedListings = listings.map(listing => 
-            (listing.ownerEmail === email && listing.name === name) ? updatedListing : listing
-        );
+        // Handle the image upload
+        const imageInput = document.getElementById('image');
+        if (imageInput.files && imageInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                updatedListing.image = e.target.result; // Store the base64 encoded image data
 
-        // Save the updated list of listings to local storage
-        localStorage.setItem('studioListings', JSON.stringify(updatedListings));
+                // Update the list of listings with the updated listing data
+                const updatedListings = listings.map(listing => 
+                    (listing.ownerEmail === email && listing.name === name) ? updatedListing : listing
+                );
 
-        // Display a success message
-        alert('Listing updated successfully!');
-        // Redirect to the view listings page
-        window.location.href = 'view-listings.html';
+                // Save the updated list of listings to local storage
+                localStorage.setItem('studioListings', JSON.stringify(updatedListings));
+
+                // Display a success message
+                alert('Listing updated successfully!');
+                // Redirect to the view listings page
+                window.location.href = 'view-listings.html';
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        } else {
+            // If no new image is uploaded, proceed without updating the image
+            updatedListing.image = listingToEdit.image; // Keep the existing image
+
+            // Update the list of listings with the updated listing data
+            const updatedListings = listings.map(listing => 
+                (listing.ownerEmail === email && listing.name === name) ? updatedListing : listing
+            );
+
+            // Save the updated list of listings to local storage
+            localStorage.setItem('studioListings', JSON.stringify(updatedListings));
+
+            // Display a success message
+            alert('Listing updated successfully!');
+            // Redirect to the view listings page
+            window.location.href = 'view-listings.html';
+        }
     });
 });

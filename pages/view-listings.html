@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Listings - Creative Studio Rentals</title>
+    <title>View Listings - Creative Studio Rentals</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="../js/color-change.js" defer></script> 
+    <script src="../js/color-change.js" defer></script>
+    <script src="../js/view-listings.js" defer></script> <!-- Make sure this script includes the viewDetails function -->
 </head>
 <body>
     <header>
         <h1 class="colorchange-text" id="dynamicTitle">Creative Studio Rentals</h1>
         <nav>
             <ul>
-                <li><a href="owner_homepage.html">Home</a></li>
-                <li><a href="login.html">Logout</a></li>
-                <li><a id="" href="owner-profile.html">Profile</a></li> <!-- Profile link -->
+                <li><a href="renter-profile.html">Home</a></li>
+                <li><a id="loginLogoutLink" href="login.html">Logout</a></li>
+                <li><a href="owner-profile.html">Profile</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <button onclick="history.back()">Go Back</button> 
-        <h2>My Listings</h2>
+        <h2>Your Listings</h2>
         <div id="ownerListings"></div>
     </main>
     <footer>
         <p>&copy; <script>document.write(new Date().getFullYear());</script> Creative Studio Rentals. All rights reserved.</p>
     </footer>
-    <script src="../js/view-listings.js"></script>
 </body>
 </html>
