@@ -75,9 +75,24 @@ form button {
     cursor: pointer;
 }
 
+button {
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555; /* Darker background color on hover */
+}
+
+
 form button:hover {
     background-color: #555; /* Darker background color on hover */
 }
+
 
 /* Modal styles */
 .modal {
@@ -113,4 +128,13 @@ form button:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+div{
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
 }
