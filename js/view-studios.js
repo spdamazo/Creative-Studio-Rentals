@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studioItem.className = 'listing-item';
             studioItem.innerHTML = `
                 <div>
-                    <img src="${photoUrl}" alt="${studio.name} image" style="width: 500px; height: auto;">
+                    <img src="${photoUrl}" alt="${studio.name} image" style="width: 400px; height: auto;">
                 </div>
                 <h3>${studio.name}</h3>
                 <p>${studio.address}</p>

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             studioDetailsViewContainer.innerHTML = `
                 <h2>${studio.name}</h2>
-                <img src="${photoUrl}" alt="${studio.name} image" style="width: 500px; height: auto;">
+                <img src="${photoUrl}" alt="${studio.name} image" style="width: 400px; height: auto;">
                 <p><strong>Address:</strong> ${studio.address}</p>
                 <p><strong>Area:</strong> ${studio.area || 'N/A'} sq meters</p>
                 <p><strong>Type:</strong> ${studio.type}</p>

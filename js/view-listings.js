@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const listingsHtml = ownerListings.map((listing, index) => `
             <div class="listing">
                 <h3>${listing.name}</h3>
-                <div>${listing.image ? `<img src="${listing.image}" alt="${listing.name} image" style="width: 500px; height: auto;">` : ''}</div>
+                <div>${listing.image ? `<img src="${listing.image}" alt="${listing.name} image" style="width: 400px; height: auto;">` : ''}</div>
                 <p>Address: ${listing.address}</p>
                 <p>Area: ${listing.area} sq meters</p>
                 <p>Type: ${listing.type}</p>

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (studio) {
             studioDetailsContainer.innerHTML = `
                 <h2>${studio.name}</h2>
-                ${studio.image ? `<img src="${studio.image}" alt="${studio.name} image" style="width: 500px; height: auto;">` : ''}
+                ${studio.image ? `<img src="${studio.image}" alt="${studio.name} image" style="width: 400px; height: auto;">` : ''}
                 <p><strong>Address:</strong> ${studio.address}</p>
                 <p><strong>Area:</strong> ${studio.area} sq meters</p>
                 <p><strong>Type:</strong> ${studio.type}</p>
