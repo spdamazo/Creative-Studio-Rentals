@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 localStorage.setItem('selectedStudioIndex', index);
                 const role = getUserRole();
                 if (role === 'owner') {
-                    window.location.href = 'studio-details.html';
+                    window.location.href = 'studio-details-view2.html';
                 } else if (role === 'renter') {
                     window.location.href = 'studio-details-view.html';
                 } else {
