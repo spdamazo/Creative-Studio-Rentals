@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const studioListContainer = document.getElementById('studioList');
     const filterForm = document.getElementById('filterForm');
     const showAllButton = document.getElementById('showAllButton');
+    
+    let originalStudioListings = []; // Store the original listings to maintain the mapping
 
     // Function to display studio listings in the container
-    function displayStudioListings(studioListings) {
+    function displayStudioListings(studioListings, originalIndices) {
+        if (!studioListContainer) return; // Check if the container exists
         studioListContainer.innerHTML = ''; // Clear the existing listings
         studioListings.forEach((studio, index) => {
             const photoUrl = studio.image && isValidUrl(studio.image) ? studio.image : '../images/default-photo.jpg';
@@ -20,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${studio.name}</h3>
                 <p>${studio.address}</p>
                 <p>${studio.type}</p>
-                <button class="view-details-button" data-index="${index}">View Details</button>
+                <button class="view-details-button" data-index="${index}" data-original-index="${originalIndices[index]}">View Details</button>
             `;
             studioListContainer.appendChild(studioItem);
         });
@@ -28,52 +31,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to check if a URL is valid
     function isValidUrl(url) {
-        return typeof url === 'string' && (url.startsWith('http') || url.startsWith('data:image'));
+        try {
+            new URL(url); // Attempt to create a new URL object
+            return true;
+        } catch (_) {
+            return false;
+        }
     }
 
     // Function to filter studio listings based on user input
     function filterStudioListings(event) {
         event.preventDefault();
 
-        const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
-        const addressFilter = document.getElementById('addressFilter').value.toLowerCase();
-        const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
+        const nameFilter = document.getElementById('nameFilter')?.value.toLowerCase() || '';
+        const addressFilter = document.getElementById('addressFilter')?.value.toLowerCase() || '';
+        const typeFilter = document.getElementById('typeFilter')?.value.toLowerCase() || '';
 
         const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
-        const filteredStudioListings = allStudioListings.filter(studio =>
+        const filteredStudioListings = allStudioListings.filter((studio, index) =>
             (nameFilter === '' || studio.name.toLowerCase().includes(nameFilter)) &&
             (addressFilter === '' || studio.address.toLowerCase().includes(addressFilter)) &&
             (typeFilter === '' || studio.type.toLowerCase().includes(typeFilter))
         );
 
-        displayStudioListings(filteredStudioListings);
+        const originalIndices = allStudioListings
+            .map((studio, index) => filteredStudioListings.includes(studio) ? index : null)
+            .filter(index => index !== null);
+
+        displayStudioListings(filteredStudioListings, originalIndices);
     }
 
     // Function to redirect to the details page for a selected studio
-    function redirectToDetailsPage(index) {
+    function redirectToDetailsPage(originalIndex) {
         const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
-        if (index >= 0 && index < allStudioListings.length) {
-            localStorage.setItem('selectedStudioIndex', index);
+        if (originalIndex >= 0 && originalIndex < allStudioListings.length) {
+            localStorage.setItem('selectedStudioIndex', originalIndex);
             window.location.href = 'studio-details-view.html'; // Ensure this URL is correct
         } else {
             alert('Studio not found');
         }
     }
 
-    filterForm.addEventListener('submit', filterStudioListings);
+    // Ensure elements exist before adding event listeners
+    if (filterForm) filterForm.addEventListener('submit', filterStudioListings);
+    if (showAllButton) {
+        showAllButton.addEventListener('click', () => {
+            const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
+            displayStudioListings(allStudioListings, [...Array(allStudioListings.length).keys()]); // Pass original indices
+        });
+    }
 
-    showAllButton.addEventListener('click', () => {
-        const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
-        displayStudioListings(allStudioListings);
-    });
-
-    studioListContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('view-details-button')) {
-            const studioIndex = parseInt(event.target.getAttribute('data-index'), 10); // Ensure index is an integer
-            redirectToDetailsPage(studioIndex);
-        }
-    });
+    if (studioListContainer) {
+        studioListContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('view-details-button')) {
+                const originalIndex = parseInt(event.target.getAttribute('data-original-index'), 10); // Get the original index
+                redirectToDetailsPage(originalIndex);
+            }
+        });
+    }
 
     // Display all studio listings on page load
-    showAllButton.click();
+    if (showAllButton) showAllButton.click();
 });
