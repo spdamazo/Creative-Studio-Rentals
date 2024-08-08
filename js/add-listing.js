@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
             available: document.getElementById('available').checked,
             rental_term: document.getElementById('rental_term').value,
             price: document.getElementById('price').value,
-            ownerEmail: loggedInUser.email, // Associate the listing with the owner
-            ownerPhone: loggedInUser.phone,
+            ownerName: loggedInUser.name, // Associate the listing with the owner's name
+            ownerEmail: loggedInUser.email, // Associate the listing with the owner's email
+            ownerPhone: loggedInUser.phone || 'Not provided', // Associate the listing with the owner's phone
             image: '' // Placeholder for the image data
         };
 

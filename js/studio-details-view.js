@@ -1,5 +1,3 @@
-// Studio details - renter's view of studio details
-
 document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsViewContainer = document.getElementById('studioDetailsView');
 
@@ -19,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Available:</strong> ${studio.available ? 'Yes' : 'No'}</p>
                 <p><strong>Rental Term:</strong> ${studio.rental_term || 'N/A'}</p>
                 <p><strong>Price:</strong> $${studio.price || 'N/A'}</p>
+                <p><strong>Owner:</strong> ${studio.ownerName || 'Not provided'}</p>
                 <p><strong>Email:</strong> ${studio.ownerEmail || 'Not provided'}</p>
                 <p><strong>Phone:</strong> ${studio.ownerPhone || 'Not provided'}</p>
             `;

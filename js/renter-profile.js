@@ -1,5 +1,3 @@
-// Profile Page - renter's profile page
-
 document.addEventListener('DOMContentLoaded', () => {
     // Get the profile form element
     const profileForm = document.getElementById('profileForm');

@@ -66,7 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
             available: document.getElementById('available').checked,
             rental_term: document.getElementById('rental_term').value,
             price: document.getElementById('price').value,
-            ownerEmail: listingToEdit.ownerEmail // Ensure ownerEmail remains unchanged
+            ownerName: listingToEdit.ownerName, // Ensure ownerName remains unchanged
+            ownerEmail: listingToEdit.ownerEmail, // Ensure ownerEmail remains unchanged
+            ownerPhone: listingToEdit.ownerPhone || 'Not provided', // Ensure ownerPhone remains unchanged
         };
 
         // Handle the image upload

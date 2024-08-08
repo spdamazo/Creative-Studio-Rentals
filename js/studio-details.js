@@ -1,5 +1,3 @@
-// Studio details - owner's view of studio details
-
 document.addEventListener('DOMContentLoaded', () => {
     const studioDetailsContainer = document.getElementById('studioDetails');
 
@@ -17,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Available:</strong> ${studio.available ? 'Yes' : 'No'}</p>
                 <p><strong>Rental Term:</strong> ${studio.rental_term}</p>
                 <p><strong>Price:</strong> $${studio.price}</p>
+                <p><strong>Owner:</strong> ${studio.ownerName || 'Not provided'}</p>
                 <p><strong>Email:</strong> ${studio.ownerEmail}</p>
                 <p><strong>Phone:</strong> ${studio.ownerPhone || 'Not provided'}</p>
-                
             `;
         } else {
             studioDetailsContainer.innerHTML = '<p>No details available.</p>';

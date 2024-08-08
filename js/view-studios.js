@@ -3,8 +3,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const studioListContainer = document.getElementById('studioList');
     const filterForm = document.getElementById('filterForm');
+    const filterToggleButton = document.getElementById('filterToggleButton');
     const showAllButton = document.getElementById('showAllButton');
-    
+
     let originalStudioListings = []; // Store the original listings to maintain the mapping
 
     // Function to display studio listings in the container
@@ -23,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${studio.name}</h3>
                 <p>${studio.address}</p>
                 <p>${studio.type}</p>
+                <p>Area: ${studio.area} sq meters</p>
+                <p>Capacity: ${studio.capacity}</p>
+                <p>Price: $${studio.price}</p>
                 <button class="view-details-button" data-index="${index}" data-original-index="${originalIndices[index]}">View Details</button>
             `;
             studioListContainer.appendChild(studioItem);
@@ -45,13 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nameFilter = document.getElementById('nameFilter')?.value.toLowerCase() || '';
         const addressFilter = document.getElementById('addressFilter')?.value.toLowerCase() || '';
+        const areaFilter = document.getElementById('areaFilter')?.value.toLowerCase() || '';
         const typeFilter = document.getElementById('typeFilter')?.value.toLowerCase() || '';
+        const capacityFilter = document.getElementById('capacityFilter')?.value.toLowerCase() || '';
+        const priceFilter = document.getElementById('priceFilter')?.value.toLowerCase() || '';
+        const parkingFilter = document.getElementById('parkingFilter')?.checked;
+        const publicTransportFilter = document.getElementById('publicTransportFilter')?.checked;
+        const availableFilter = document.getElementById('availableFilter')?.checked;
+        const rentalTermFilter = document.getElementById('rentalTermFilter')?.value.toLowerCase() || '';
 
         const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
-        const filteredStudioListings = allStudioListings.filter((studio, index) =>
+        const filteredStudioListings = allStudioListings.filter((studio) =>
             (nameFilter === '' || studio.name.toLowerCase().includes(nameFilter)) &&
             (addressFilter === '' || studio.address.toLowerCase().includes(addressFilter)) &&
-            (typeFilter === '' || studio.type.toLowerCase().includes(typeFilter))
+            (areaFilter === '' || studio.area.toString().toLowerCase().includes(areaFilter)) &&
+            (typeFilter === '' || studio.type.toLowerCase().includes(typeFilter)) &&
+            (capacityFilter === '' || studio.capacity.toString().toLowerCase().includes(capacityFilter)) &&
+            (priceFilter === '' || studio.price.toString().toLowerCase().includes(priceFilter)) &&
+            (!parkingFilter || studio.parking.toLowerCase() === 'yes') &&
+            (!publicTransportFilter || studio.publicTransport.toLowerCase() === 'yes') &&
+            (!availableFilter || studio.available) &&
+            (rentalTermFilter === '' || studio.rentalTerm.toLowerCase().includes(rentalTermFilter))
         );
 
         const originalIndices = allStudioListings
@@ -59,6 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
             .filter(index => index !== null);
 
         displayStudioListings(filteredStudioListings, originalIndices);
+    }
+
+    // Function to toggle the visibility of the filter form
+    function toggleFilterForm() {
+        if (filterForm.style.display === 'none' || filterForm.style.display === '') {
+            filterForm.style.display = 'block';
+            filterToggleButton.textContent = 'Hide Filters';
+        } else {
+            filterForm.style.display = 'none';
+            filterToggleButton.textContent = 'Show Filters';
+        }
     }
 
     // Function to redirect to the details page for a selected studio
@@ -79,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const allStudioListings = JSON.parse(localStorage.getItem('studioListings')) || [];
             displayStudioListings(allStudioListings, [...Array(allStudioListings.length).keys()]); // Pass original indices
         });
+    }
+    if (filterToggleButton) {
+        filterToggleButton.addEventListener('click', toggleFilterForm);
     }
 
     if (studioListContainer) {
