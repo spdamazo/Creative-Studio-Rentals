@@ -2,10 +2,10 @@ const express = require('express');
 const path = require('path');
 var cors = require('cors');
 const app = express();
-const port = 8000;
+const port = 7777;
 
 app.use(cors());
-
+app.use(express.static(path.join(__dirname)));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
