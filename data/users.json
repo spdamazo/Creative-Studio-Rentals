@@ -18,10 +18,10 @@
     "email": "jordan.davis@example.com"
   },
   {
-    "role": "renter",
     "name": "Morgan Brown",
-    "phone": "(555) 567-8901",
-    "email": "morgan.brown@example.com"
+    "phone": "(555) 567-8902",
+    "email": "morgan.brown@example.com",
+    "role": "renter"
   },
   {
     "role": "owner",
