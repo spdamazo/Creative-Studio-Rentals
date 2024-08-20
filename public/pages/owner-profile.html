@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Profile - Creative Studio Rentals</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/owner-profile.css">
+</head>
+<body>
+    <header>
+        <img src="../images/header.png" alt="Creative Studio Rentals" id="dynamicTitle" height="80px">
+        <nav>
+            <ul>
+                <li><a href="owner_homepage.html">Home</a></li>
+                <li><a id="" href="owner-profile.html">Profile</a></li>
+                <li><a id="loginLogoutLink" href="login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Owner's Profile Page -->
+        <h2>Owner Profile</h2>
+        <form id="profileForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Update Profile</button>
+        </form>
+        <!-- Owner-specific actions -->
+        <div id="ownerLinks">
+            <h3>Owner Actions</h3>
+            <!-- ADD CSS: owner-profile.css -->
+            <ul>
+                <li><a href="add-listing.html">Add Listing</a></li>
+                <li><a href="view-listings.html">View Listings</a></li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; <script>document.write(new Date().getFullYear());</script> Creative Studio Rentals. All rights reserved.</p>
+    </footer>
+    <script src="../js/owner-profile.js"></script>
+</body>
+</html>

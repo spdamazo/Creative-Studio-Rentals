@@ -1,0 +1,26 @@
+[
+  {
+    "role": "owner",
+    "name": "Alex Johnson",
+    "phone": "(555) 123-4567",
+    "email": "alex.johnson@example.com"
+  },
+  {
+    "role": "owner",
+    "name": "Taylor Smith",
+    "phone": "(555) 234-5678",
+    "email": "taylor.smith@example.com"
+  },
+  {
+    "role": "renter",
+    "name": "Jordan Davis",
+    "phone": "(555) 456-7890",
+    "email": "jordan.davis@example.com"
+  },
+  {
+    "role": "renter",
+    "name": "Morgan Brown",
+    "phone": "(555) 567-8901",
+    "email": "morgan.brown@example.com"
+  }
+]

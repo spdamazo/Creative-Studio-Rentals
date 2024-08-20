@@ -1,15 +1,16 @@
 {
   "name": "creative-studio-rentals",
   "version": "1.0.0",
-  "description": "Team: Stephanie Maru, Aaron Amoso, Hyunjung Lim",
-  "main": "index.js",
+  "description": "Team:\r Stephanie Maru,\r Aaron Amoso,\r Hyunjung Lim",
+  "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
   }
 }
