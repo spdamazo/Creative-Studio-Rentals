@@ -4,7 +4,6 @@
   "description": "Team:\r Stephanie Maru,\r Aaron Amoso,\r Hyunjung Lim",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
