@@ -22,5 +22,11 @@
     "name": "Morgan Brown",
     "phone": "(555) 567-8901",
     "email": "morgan.brown@example.com"
+  },
+  {
+    "role": "owner",
+    "name": "Jamie Lee",
+    "phone": "(555) 345-6789",
+    "email": "jamie.lee@example.com"
   }
 ]
